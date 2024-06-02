@@ -1,6 +1,11 @@
 {
+<<<<<<< HEAD
   "short_name": "I Was Here",
   "name": "I Was Here",
+=======
+  "short_name": "I Was Here",
+  "name": "I Was Here",
+>>>>>>> 86e0fdd51e827251f29cd6088b84c99630b65394
   "icons": [{
      "src": "assets/favicon.png",
      "sizes": "64x64",
@@ -10,8 +15,13 @@
     "sizes": "512x512",
     "type": "image/png"
   }],
+<<<<<<< HEAD
   "start_url": "/I-Was-Here-PHP-Attendance-System-main/",
   "scope": "/I-Was-Here-PHP-Attendance-System-main/",
+=======
+  "start_url": "/I-Was-Here-PHP-Attendance-System-main/",
+  "scope": "/I-Was-Here-PHP-Attendance-System-main/",
+>>>>>>> 86e0fdd51e827251f29cd6088b84c99630b65394
   "background_color": "white",
   "theme_color": "white",
   "display": "standalone"

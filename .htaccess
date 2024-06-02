@@ -1,7 +1,16 @@
+<<<<<<< HEAD
 RewriteEngine On
 RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
 RewriteBase /I-Was-Here-PHP-Attendance-System-main/
 RewriteRule ^index\.php$ - [L]
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
+=======
+RewriteEngine On
+RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+RewriteBase /I-Was-Here-PHP-Attendance-System-main/
+RewriteRule ^index\.php$ - [L]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+>>>>>>> 86e0fdd51e827251f29cd6088b84c99630b65394
 RewriteRule . /I-Was-Here-PHP-Attendance-System-main/index.php [L]
