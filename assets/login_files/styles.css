@@ -1,0 +1,163 @@
+﻿@charset "utf-8";
+/* CSS 2016 Copyright by Do Nguyen Thanh Trieu  */
+body{
+	font-family:Arial, Helvetica, Verdana, Geneva, sans-serif;	
+}
+a,html,input,body,img,p,br,ul,li,h1,h2,h3,h4{
+	text-decoration:none;
+	margin:0;
+	padding:0;
+}
+ul,li{
+	list-style-type:none;
+}
+a:hover{
+	cursor:pointer;
+}
+a:visited,a:link{
+	color:inherit;
+    decoration: none; 
+}
+/*--------------------------------------------------------------
+*{word-wrap: break-word} >>> REPONSIVE
+---------------------------------------------------------------- */
+@media screen and (max-width: 1280px) and  (min-width: 1024px){
+	
+}
+@media screen and (max-width: 1024px) and  (min-width: 970px){
+	
+}
+@media screen and  (max-width: 970px) and (min-width:767px){
+	
+}
+@media screen and (max-width:767px){
+	.slide-left {
+		display: none;
+	}
+}
+@media screen and (min-width:320px) and (max-width: 480px) {
+}
+@media screen and (max-width: 380px) {
+}
+/*---- end Responsive base screen witdh ------- */
+@font-face {
+    font-family:myFONT;
+    src:url(../font/Bebas.ttf);
+	src: url(../font/Bebas.woff);
+}
+/*--------------------------------------------------------------
+>>> WRAP-MAIN ; CONTAINER
+---------------------------------------------------------------- */
+body{
+    background: url(../img/bg.jpg) center no-repeat;
+    color: #000;
+	background-size: cover;
+    min-height: 100vh;
+}
+.background {
+	position:absolute;
+	display:block;
+	top:0;
+	left:0;
+	z-index:-999;
+}
+.logo-top{
+	background: rgba(255,255,255,0.7);
+	/* background: linear-gradient(#fff, #d0d0d0, #e8e8e8); */
+	padding:10px;
+	width: 100%;
+	border-radius: 5px 5px 0 0;
+}
+.logo-top .mg-0{
+	margin: 0!important;
+}
+.logo-top ul .logo-hd{
+	text-align: center;
+}
+.logo-top ul .name-hd{
+	text-align: center;padding: 0;
+}
+.logo-top ul .name-hd h1{
+	color: #095f90;
+    font-size: 120%;
+    line-height: 42px;  
+	margin: 0;
+	font-weight: bold;
+}
+
+.name-lg{
+	text-align: center;
+	padding: 10px 0 10px 0;
+	font-size:150%;
+	color:#095f90
+}
+
+.form-login{
+	padding: 10px 20px;
+	background: rgba(255,255,255,0.7);
+	width: 100%;
+	border-radius: 0 0 5px 5px;
+	/* box-shadow: -5px 5px 20px #dedede inset; */
+}
+.btn-100{
+	width:100%;
+	margin-top: 20px;
+	margin-bottom: 20px;
+	height:60px;
+	border-radius: 5px 5px!important;
+}
+
+#Captcha{
+	border: none;
+}
+/****************************************************************/
+.message-notification {
+    margin: 0px 0px;
+}
+
+#flash-messages {
+    position: relative;
+    padding: 0;
+    background-position: 10px 11px !important;
+    background-repeat: no-repeat !important;
+    font-size: 13px;
+}
+
+    #flash-messages div {
+        display: block;
+        font-style: normal;
+        padding: 10px 10px 10px 36px;
+        line-height: 1.5em;
+    }
+
+.success {
+    background: #d5ffce url('../images/success.png') 10px center no-repeat;
+    border: 1px solid #9adf8f;
+    color: #556652;
+}
+
+.error {
+    background: #ffcece url('../images/error.png') 10px center no-repeat;
+    border: 1px solid #df8f8f;
+    color: #665252;
+}
+
+.warning {
+    background: #fffbcc url('../images/warning.png') 10px center no-repeat;
+    border: 1px solid #e6db55;
+    color: #666452;
+}
+
+.info {
+    background: #dbe3ff url('../images/info.png') 10px center no-repeat;
+    border: 1px solid #a2b4ee;
+    color: #585b66;
+}
+
+a.close {
+    color: #990000;
+    font-size: 9px;
+    position: absolute;
+    right: 5px;
+    top: 5px;
+}
