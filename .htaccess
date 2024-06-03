@@ -1,7 +1,7 @@
 RewriteEngine On
 RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
-RewriteBase /I-Was-Here-PHP-Attendance-System-main/
+RewriteBase /quan_ly_diem_danh/
 RewriteRule ^index\.php$ - [L]
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule . /I-Was-Here-PHP-Attendance-System-main/index.php [L]
+RewriteRule . /quan_ly_diem_danh/index.php [L]

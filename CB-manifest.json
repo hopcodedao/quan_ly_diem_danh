@@ -10,8 +10,8 @@
     "sizes": "512x512",
     "type": "image/png"
   }],
-  "start_url": "/I-Was-Here-PHP-Attendance-System-main/",
-  "scope": "/I-Was-Here-PHP-Attendance-System-main/",
+  "start_url": "/quan_ly_diem_danh/",
+  "scope": "/quan_ly_diem_danh/",
   "background_color": "white",
   "theme_color": "white",
   "display": "standalone"
