@@ -4,8 +4,6 @@ $_PMETA = ["load" => [
   ["s", HOST_ASSETS."CB-autocomplete.js", "defer"],
   ["s", HOST_ASSETS."csv.min.js", "defer"],
   ["s", HOST_ASSETS."A-import.js", "defer"],
-  ["s", HOST_ASSETS."PAGE-nfc.js", "defer"],
-  ["s", HOST_ASSETS."A-users-nfc.js", "defer"],
   ["s", HOST_ASSETS."A-users.js", "defer"]
 ]];
 
@@ -27,10 +25,16 @@ require PATH_PAGES . "TEMPLATE-top.php"; ?>
 #cb-page-1 > h4{
   font-weight: bold;
 }
+
+#cb-page-1 > form > button.btn.btn-primary.p-3.white-icon > i:nth-child(2) {
+  margin-left: -5px; /* Điều chỉnh giá trị này để các icon sát nhau hơn hoặc xa nhau hơn */
+}
+
+
 </style>
 
 <!-- (B1) HEADER -->
-<h4 class="mb-3">QUẢN LÝ SINH VIÊN</h4>
+<h4 class="mb-3">QUẢN LÝ THÀNH VIÊN</h4>
 
 <!-- (B2) SEARCH BAR -->
 <form class="d-flex align-items-stretch head border mb-3 p-2" onsubmit="return usr.search()">

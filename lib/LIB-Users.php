@@ -41,29 +41,7 @@ class Users extends Core {
   //  $page : optional, current page number
   function getAll ($search=null, $page=null) {
     // (D1) PARITAL USERS SQL + DATA
-    $sql = "FROM `users` WHERE `user_level`='U'";
-    $data = null;
-    if ($search != null) {
-      $sql .= " WHERE `user_name` LIKE ? OR `user_email` LIKE ?";
-      $data = ["%$search%", "%$search%"];
-    }
-
-    // (D2) PAGINATION
-    if ($page != null) {
-      $this->Core->paginator(
-        $this->DB->fetchCol("SELECT COUNT(*) $sql", $data), $page
-      );
-      $sql .= $this->Core->page["lim"];
-    }
-
-    // (D3) RESULTS
-    return $this->DB->fetchAll("SELECT * $sql", $data, "user_id");
-  }
-
-  
-  function getAlltc ($search=null, $page=null) {
-    // (D1) PARITAL USERS SQL + DATA
-    $sql = "FROM `users` WHERE `user_level`='T'";
+    $sql = "FROM `users`";
     $data = null;
     if ($search != null) {
       $sql .= " WHERE `user_name` LIKE ? OR `user_email` LIKE ?";
