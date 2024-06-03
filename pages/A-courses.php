@@ -11,7 +11,7 @@ $_PMETA = ["load" => [
 // (B) HTML
 require PATH_PAGES . "TEMPLATE-top.php"; ?>
 <!-- (B1) HEADER -->
-<h4 class="mb-3">QUẢN LÝ MÔN HỌC</h4>
+<h4 class="mb-3">QUẢN LÝ HỌC KỲ</h4>
 <style>
   #cb-page-1 > h4{
   font-weight: bold;
@@ -24,7 +24,7 @@ require PATH_PAGES . "TEMPLATE-top.php"; ?>
   <button class="btn btn-primary p-3 ico-sm icon-arrow-right" type="button" data-bs-toggle="dropdown"></button>
   <ul class="dropdown-menu dropdown-menu-dark">
     <li class="dropdown-item" onclick="course.addEdit()">
-      <i class="text-secondary ico-sm icon-plus"></i> Thêm môn học
+      <i class="text-secondary ico-sm icon-plus"></i> Thêm học kỳ
     </li>
     <li class="dropdown-item" onclick="course.import()">
       <i class="text-secondary ico-sm icon-upload3"></i> Tải tệp CSV

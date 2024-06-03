@@ -138,7 +138,7 @@ require PATH_PAGES . "TEMPLATE-top.php"; ?>
     <div class="small-box bg-white">
       <div class="inner">
         <h3><?= $classesCount ?></h3>
-        <p>Tổng Lớp Học</p>
+        <p>Tổng Hoạt động</p>
       </div>
       <div class="icon">
         <i class="icon-list"></i>

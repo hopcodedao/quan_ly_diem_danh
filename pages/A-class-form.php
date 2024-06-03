@@ -9,30 +9,30 @@ if ($edit) {
 }
 
 // (B) CLASS FORM ?>
-<h3 class="mb-3"><?=$edit?"CHỈNH SỬA":"THÊM"?> LỚP HỌC</h3>
+<h3 class="mb-3"><?=$edit?"CHỈNH SỬA":"THÊM"?> HOẠT ĐỘNG</h3>
 <form onsubmit="return classes.save()">
-  <div class="fw-bold text-danger mb-0">MÔN HỌC</div>
-  <div class="text-secondary mb-2">Nhập Tên/ Mã môn học. Chọn vào gợi ý tự động.</div>
+  <div class="fw-bold text-danger mb-0">HỌC KỲ</div>
+  <div class="text-secondary mb-2">Nhập Tên/ Mã học kỳ. Chọn vào gợi ý tự động.</div>
   <div class="bg-white border p-4 mb-4">
     <div class="form-floating">
       <input type="text" class="form-control" id="class_course"
              <?=isset($class)?" readonly onclick='classes.toggle(false)'":""?>
              value="<?=isset($class)?"[{$class["course_code"]}] {$class["course_name"]}":""?>">
       <input type="hidden" id="class_course_code" value="<?=isset($class)?$class["course_code"]:""?>">
-      <label>Môn học</label>
+      <label>Học kỳ</label>
     </div>
     <small id="class_course_note" class="text-danger<?=isset($class)?"":" d-none"?>">
-      * Click để thay đổi môn học.
+      * Click để thay đổi học kỳ.
     </small>
   </div>
 
-  <div class="fw-bold text-danger mb-2">LỚP HỌC</div>
+  <div class="fw-bold text-danger mb-2">HOẠT ĐỘNG</div>
   <div class="bg-white border p-4 mb-4">
 
   <div class="form-floating mb-4">
       <input type="text" class="form-control" id="class_desc"<?=isset($class)?"":" disabled"?>
              value="<?=isset($class)?$class["class_desc"]:""?>">
-      <label>Tên Lớp</label>
+      <label>Tên hoạt động</label>
     </div>
 
     <input type="hidden" id="class_id" value="<?=isset($class)?$class["class_id"]:""?>">

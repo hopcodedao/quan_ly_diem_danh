@@ -71,10 +71,10 @@
     <i class="text-secondary ico-sm icon-briefcase"></i> Người dùng
   </a>
   <a class="nav-link ms-1" href="<?= HOST_BASE ?>A/courses">
-    <i class="text-secondary ico-sm icon-briefcase"></i> Môn học
+    <i class="text-secondary ico-sm icon-briefcase"></i> Học kỳ
   </a>
   <a class="nav-link ms-1" href="<?= HOST_BASE ?>A/classes">
-    <i class="text-secondary ico-sm icon-file-text2"></i> Lớp học
+    <i class="text-secondary ico-sm icon-file-text2"></i> Hoạt động
   </a>
   <a class="nav-link ms-1" href="<?= HOST_BASE ?>A/settings">
     <i class="text-secondary ico-sm icon-cog"></i> Cài đặt
