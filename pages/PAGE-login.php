@@ -199,48 +199,6 @@ require PATH_PAGES . "TEMPLATE-top.php"; ?>
                 name="Password" placeholder="Nhập mật khẩu" required="required" type="password" id="login-pass">
             </div>
           </div>
-
-
-          <div class="form-group">
-            <div class="input-group mb-2">
-              <div class="box-captcha">
-                <style>
-                  .box-captcha {
-                    position: relative;
-                    height: 37px
-                  }
-
-                  .box-captcha br {
-                    display: none
-                  }
-
-                  .box-captcha img {
-                    height: 37px;
-                    position: absolute;
-                    top: 0;
-                    left: 160px
-                  }
-
-                  .box-captcha input {
-                    height: 37px;
-                    position: absolute;
-                    left: 0;
-                    top: 0;
-                    width: 125px;
-                    text-align: center
-                  }
-                </style>
-                <div class="captchaContainer_1f00d"><img border="0" class=" captcha-input imgcaptcha_1f00d" float="left"
-                    href="javascript:void(0)" id="newcaptcha" src="<?= HOST_ASSETS ?>/login_files/GetCaptcha"
-                    style="padding-right: 5px; max-height: 35px"></div><input class="captcha-input txtcaptcha_1f00d"
-                  id="Captcha" name="Captcha" placeholder="Nhập mã" type="text"><a href="javascript:void(0)"
-                  class="captcharefresh refreshNewCaptcha_1f00d"></a>
-                <script>$(function () { $('.refreshNewCaptcha_1f00d').click(function (e) { var a = $('.imgcaptcha_1f00d'), n = a.attr('src'); n = n.replace(/(.*?)\?r=\d+\.\d+$/, '$1'), 'undefined' != typeof console && console.log(n); var c = new Image; $(c).load(function () { a.prev('.captchaContainer_1f00d').empty().append(c) }), $('.imgcaptcha_1f00d').attr('src', n + '?r=' + Math.random()), e.preventDefault() }) });</script>
-              </div>
-
-            </div>
-            <div class="clearfix"></div>
-          </div>
           <button type="submit" class="btn btn-primary btn-100">Đăng nhập</button>
 
           <!-- (C2-2) MORE LOGIN -->

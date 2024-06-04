@@ -4,19 +4,19 @@ $edit = isset($_POST["code"]) && $_POST["code"]!="";
 if ($edit) { $course = $_CORE->autoCall("Courses", "get"); }
 
 // (B) COURSE FORM ?>
-<h3 class="mb-3"><?=$edit?"CHỈNH SỬA":"THÊM"?> MÔN HỌC</h3>
+<h3 class="mb-3"><?=$edit?"CHỈNH SỬA":"THÊM"?> HỌC KỲ</h3>
 <form onsubmit="return course.save()">
   <div class="fw-bold text-danger mb-2">Thông tin cơ bản</div>
   <div class="bg-white border p-4 mb-4">
     <div class="form-floating mb-4">
       <input type="text" class="form-control" id="course_code" required value="<?=isset($course)?$course["course_code"]:""?>">
       <input type="hidden" id="course_ocode" value="<?=isset($course)?$course["course_code"]:""?>">
-      <label>Mã môn học</label>
+      <label>Mã học kỳ</label>
     </div>
 
     <div class="form-floating mb-4">
       <input type="text" class="form-control" id="course_name" required value="<?=isset($course)?$course["course_name"]:""?>">
-      <label>Tên môn học</label>
+      <label>Tên học kỳ</label>
     </div>
 
     <div class="form-floating">
