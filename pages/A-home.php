@@ -166,4 +166,18 @@ require PATH_PAGES . "TEMPLATE-top.php"; ?>
     </form>
   </div>
 </div>
+<div>
+<div class="fw-bold text-danger mb-2">Chọn khoảng thời gian để xuất dữ liệu<div>
+  <div class="bg-white border p-4 mb-4">
+    <div class="form-floating mb-4">
+      <input type="date" class="form-control" id="" required value="<?=isset($course)?$course["course_start"]:""?>">
+      <label>Ngày bắt đầu</label>
+    </div>
+
+    <div class="form-floating">
+      <input type="date" class="form-control" id="" required value="<?=isset($course)?$course["course_end"]:""?>">
+      <label>Ngày kết thúc</label>
+    </div>
+  </div>
+</div>
 <?php require PATH_PAGES . "TEMPLATE-bottom.php"; ?>
