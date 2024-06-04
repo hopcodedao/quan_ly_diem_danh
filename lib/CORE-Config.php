@@ -57,5 +57,5 @@ date_default_timezone_set(SYS_TZ);
 
 // (H) USER LEVELS
 define("USR_LVL", [
-  "A" => "Admin", "T" => "Teacher", "U" => "Student", "S" => "Suspended"
+  "A" => "Quản lý", "T" => "", "U" => "Thành viên", "S" => "Tạm khóa"
 ]);

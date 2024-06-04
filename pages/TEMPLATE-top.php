@@ -122,6 +122,20 @@
       
     <?php } ?>
 
+    <style>
+      .avt {
+    width          : 45px;
+    display        : flex;
+    align-items    : center;
+    justify-content: center;
+}
+
+.avt img {
+    width           : 100%;
+    background-color: #f0f0f0;
+    border-radius   : 50%;
+}
+    </style>
     <!-- (C2) RIGHT CONTENTS -->
     <div class="flex-grow-1">
       
@@ -138,7 +152,9 @@
             <div class="d-flex align-items-center">
               <span class="text-white pe-3">Xin chào, <?= $_SESSION["user"]["user_name"] ?>!</span> <!-- Thêm dòng này -->
               <div class="dropdown">
-                <div class="text-white ico icon-user p-2" role="button" data-bs-toggle="dropdown"></div>
+                <div class="avt" role="button" data-bs-toggle="dropdown">
+                <img src="assets/avatar/<?= $_SESSION["user"]["user_avatar"] ?>" alt="">
+                </div>
                 <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-end">
                   <li><a class="dropdown-item" href="<?= HOST_BASE ?>myaccount">
                       <i class="text-secondary ico-sm icon-user"></i> Tài khoản của tôi
