@@ -11,17 +11,37 @@ $_PMETA = ["load" => [
 // (B) HTML
 require PATH_PAGES . "TEMPLATE-top.php"; ?>
 <!-- (B1) HEADER -->
-<h4 class="mb-3">QUẢN LÝ MÔN HỌC</h4>
+<h4 class="mb-3">QUẢN LÝ HỌC KỲ</h4>
 <style>
-  #cb-page-1 > h4{
+
+#cb-page-1 > form > button:nth-child(3){
+  width: 6%;
+  background-color: #1a7f64;
+  border: none;
+}
+
+#cb-page-1 > form > button.btn.btn-primary.p-3.white-icon > i::before{
+  color: white;
+}
+
+#cb-page-1 > h4{
   font-weight: bold;
 }
+
+#cb-page-1 > form > button.btn.btn-primary.p-3.white-icon > i:nth-child(2) {
+  margin-left: -5px; /* Điều chỉnh giá trị này để các icon sát nhau hơn hoặc xa nhau hơn */
+}
+
+
 </style>
 <!-- (B2) SEARCH BAR -->
 <form class="d-flex align-items-stretch head border mb-3 p-2" onsubmit="return course.search()">
   <input type="text" id="course-search" placeholder="Tìm kiếm" class="form-control form-control-sm">
   <button type="submit" class="btn btn-primary p-3 mx-1 ico-sm icon-search"></button>
-  <button class="btn btn-primary p-3 ico-sm icon-arrow-right" type="button" data-bs-toggle="dropdown"></button>
+  <button class="btn btn-primary p-3 white-icon" type="button" data-bs-toggle="dropdown">
+  <i class="text-secondary ico-sm icon-plus"></i>
+  <i class="text-secondary ico-sm icon-users"></i>
+</button>
   <ul class="dropdown-menu dropdown-menu-dark">
     <li class="dropdown-item" onclick="course.addEdit()">
       <i class="text-secondary ico-sm icon-plus"></i> Thêm môn học

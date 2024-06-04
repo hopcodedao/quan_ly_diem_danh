@@ -1,7 +1,7 @@
 <?php
 // (A) HOST
 define("SITE_NAME", "I Was Here");
-define("HOST_BASE", "http://localhost/I-Was-Here-PHP-Attendance-System-main/"); // CHANGED BY INSTALLER
+define("HOST_BASE", "http://localhost/quan_ly_diem_danh/"); // CHANGED BY INSTALLER
 define("HOST_NAME", parse_url(HOST_BASE, PHP_URL_HOST));
 define("HOST_BASE_PATH", parse_url(HOST_BASE, PHP_URL_PATH));
 define("HOST_ASSETS", HOST_BASE . "assets/");
@@ -10,7 +10,7 @@ define("HOST_ASSETS", HOST_BASE . "assets/");
 define("HOST_API", "api/");
 define("HOST_API_BASE", HOST_BASE . HOST_API);
 define("API_HTTPS", false); // CHANGED BY INSTALLER
-define("API_CORS", false); // CHANGED BY INSTALLER
+define("API_CORS", true); // CHANGED BY INSTALLER
 // define("API_CORS", false); // no cors, accept host_name only
 // define("API_CORS", true); // any domain + mobile apps
 // define("API_CORS", "site-a.com"); // this domain only
@@ -33,7 +33,7 @@ define("PATH_PAGES", PATH_BASE . "pages" . DIRECTORY_SEPARATOR);
 define("JWT_ALGO", "HS256");
 define("JWT_EXPIRE", 0);
 define("JWT_ISSUER", "localhost"); // CHANGED BY INSTALLER
-define("JWT_SECRET", "fqE3s4g82Ek5nPFL4KMMTIlfyZUF~~=Mmttr93D5FGLVdSzy"); // CHANGED BY INSTALLER
+define("JWT_SECRET", "3pfMPyrpc1jSic595khVj.r9wIIjyemp~vsxo6e6jsxWPOk."); // CHANGED BY INSTALLER
 
 // (F) ERROR HANDLING
 /* (F1) RECOMMENDED FOR LIVE SERVER
@@ -57,5 +57,5 @@ date_default_timezone_set(SYS_TZ);
 
 // (H) USER LEVELS
 define("USR_LVL", [
-  "A" => "Quản lý", "T" => "Giảng viên", "U" => "Sinh viên", "S" => "Khóa"
+  "A" => "Admin", "T" => "Teacher", "U" => "Student", "S" => "Suspended"
 ]);

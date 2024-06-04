@@ -26,6 +26,7 @@ if (is_array($users)) {
     </thead>
     <tbody>
       <?php $count = 1;
+      
       foreach ($users as $id => $u) { ?>
         <tr>
           <td><?= $count++ ?></td>
@@ -40,9 +41,7 @@ if (is_array($users)) {
             <button type="button" class="btn btn-primary" onclick="usr.addEdit(<?= $id ?>)">
             <i class="ico-sm icon-pencil"></i>
             </button>
-            <button type="button" class="btn btn-secondary" onclick="unfc.show(<?= $id ?>)">
-            &#x1F4F6;
-            </button>
+
             <button type="button" class="btn btn-warning" onclick="usr.del(<?= $id ?>)">
             <i class="ico-sm icon-bin2"></i>
             </button>

@@ -65,23 +65,16 @@
   </a>
   <hr>
 </li>
-<li class="nav-item dropdown">
-  <a class="nav-link ms-1" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown"
-    aria-expanded="false">
-    <i class="text-secondary ico-sm icon-users"></i> Người dùng <span class="arrow">&lt;</span>
-  </a>
-  <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-    <li><a class="dropdown-item" href="<?= HOST_BASE ?>A/users">Quản lý sinh viên</a></li>
-    <li><a class="dropdown-item" href="<?= HOST_BASE ?>A/userstc">Quản lý giảng viên</a></li>
-  </ul>
-</li>
 
 <li class="nav-item">
+<a class="nav-link ms-1" href="<?= HOST_BASE ?>A/users">
+    <i class="text-secondary ico-sm icon-briefcase"></i> Người dùng
+  </a>
   <a class="nav-link ms-1" href="<?= HOST_BASE ?>A/courses">
-    <i class="text-secondary ico-sm icon-briefcase"></i> Môn học
+    <i class="text-secondary ico-sm icon-briefcase"></i> Học kỳ
   </a>
   <a class="nav-link ms-1" href="<?= HOST_BASE ?>A/classes">
-    <i class="text-secondary ico-sm icon-file-text2"></i> Lớp học
+    <i class="text-secondary ico-sm icon-file-text2"></i> Hoạt động
   </a>
   <a class="nav-link ms-1" href="<?= HOST_BASE ?>A/settings">
     <i class="text-secondary ico-sm icon-cog"></i> Cài đặt
