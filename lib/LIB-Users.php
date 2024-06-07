@@ -94,7 +94,7 @@ class Users extends Core
     $avatarFilename = null;
 
     // Xử lý tệp avatar
-    if (isset($_FILES['user_avatar']) && $_FILES['user_avatar']['error'] === UPLOAD_ERR_OK) {
+    if ($id !== null && isset($_FILES['user_avatar']) && $_FILES['user_avatar']['error'] === UPLOAD_ERR_OK) {
       $avatarFile = $_FILES['user_avatar'];
 
       // Kiểm tra kiểu tệp và kích thước (ví dụ: chỉ cho phép JPEG, PNG, tối đa 2MB)
@@ -165,10 +165,16 @@ class Users extends Core
 
       $mail->send();
     } else {
+      // Nếu không có ảnh mới, giữ nguyên ảnh cũ
+      if ($avatarFilename === null) {
+        unset($fields[array_search('user_avatar', $fields)]);
+        unset($data[array_search('user_avatar', $fields)]);
+      }
+
       $data[] = $id;
       $this->DB->update("users", $fields, "`user_id`=?", $data);
     }
-    
+
     return true;
   }
 

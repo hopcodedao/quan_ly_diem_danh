@@ -45,12 +45,13 @@ if ($edit) {
             <input type="hidden" id="user_password" value="">
             <input type="hidden" id="user_password" name="password">
 
-
             <div class="form-floating mb-2">
                 <input type="file" class="form-control" id="user_avatar_input" name="user_avatar"
                     onchange="usr.previewAvatar(this)">
                 <label>Chọn Avatar</label>
             </div>
+
+            <input type="hidden" id="current_user_avatar" name="current_user_avatar" value="<?= isset($user) ? $user['user_avatar'] : ''?>">
 
             <img id="user_avatar_preview"
                 src="<?= HOST_ASSETS . "uploads/user_avatars/" . (isset($user) && $user['user_avatar'] ? $user['user_avatar'] : 'default_avatar.png') ?>"

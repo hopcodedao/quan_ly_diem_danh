@@ -14,8 +14,6 @@ if (is_array($students)) {
                     <input id="att-n<?= $id ?>" type="text" class="form-control mt-2" placeholder="Ghi chú (nếu có)"
                         value="<?= $s["a_notes"] ? $s["a_notes"] : "" ?>">
                 </div>
-
-
                 <button type="button" class="btn btn-danger p-3 ico-sm icon-bin2" onclick="attend.del(<?= $id ?>)"></button>
             </div>
         <?php }

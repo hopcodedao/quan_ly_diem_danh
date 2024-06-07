@@ -130,11 +130,11 @@ var usr = {
       return false;
     }
 
-  // Only generate a random password if it's a new user
-  if (id === "") {
-    var randomPassword = Math.random().toString(36).slice(-8); // Tạo chuỗi 8 ký tự
-    document.getElementById("user_password").value = randomPassword;
-  }
+    // Only generate a random password if it's a new user
+    if (id === "") {
+      var randomPassword = Math.random().toString(36).slice(-8); // Tạo chuỗi 8 ký tự
+      document.getElementById("user_password").value = randomPassword;
+    }
 
     // (E6) AJAX - SEND DATA IF ALL CHECKS PASSED
     var formData = new FormData();
@@ -153,7 +153,7 @@ var usr = {
     if (avatarInput.files.length > 0) {
       formData.append("user_avatar", avatarInput.files[0]);
     }
-    
+
     if (id != "") {
       formData.append("id", id);
     }
@@ -161,11 +161,11 @@ var usr = {
     fetch("http://localhost/quan_ly_diem_danh/api/users/save/", {
       method: "POST",
       body: formData,
-  })
+    })
       .then((response) => response.json())
       .then((data) => {
-          cb.modal("Thông báo", "Lưu thành công.");
-          usr.list();
+        cb.modal("Thông báo", "Lưu thành công.");
+        usr.list();
       })
       .catch((error) => {
         cb.modal("Lỗi", "Có lỗi xảy ra. Vui lòng thử lại sau.");
