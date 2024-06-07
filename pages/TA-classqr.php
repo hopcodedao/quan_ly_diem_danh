@@ -14,7 +14,8 @@ if (!is_array($class)) {
 <html>
 
 <head>
-  <title>QR Code</title>
+  <title>QR Code - Đội Công tác xã hội CTUT</title>
+  <link rel="icon" href="<?= HOST_ASSETS ?>ctut.png" type="image/png">
   <style>
     * {
       font-family: Arial, sans-serif;
@@ -30,14 +31,14 @@ if (!is_array($class)) {
       align-items: center;
     }
 
-    #qrcode > img{
+    #qrcode>img {
       margin: 0 auto;
     }
 
     #qrwrap {
       text-align: center;
-      width: 500px;
-      height: 500px;
+      width: 600px;
+      height: 600px;
       padding: 20px;
       border: 1px solid #e1e1e1;
     }
@@ -62,7 +63,7 @@ if (!is_array($class)) {
           "i" => $class["class_id"],
           "h" => $class["class_hash"]
         ]) ?>',
-        width: 400, height: 400,
+        width: 500, height: 500,
         colorDark: "#000000",
         colorLight: "#ffffff",
         correctLevel: QRCode.CorrectLevel.H
@@ -74,7 +75,7 @@ if (!is_array($class)) {
 <body>
   <div id="qrwrap">
     <div id="qrcode"></div>
-    <div id="qrcourse">[<?= $class["course_code"] ?>] <?= $class["course_name"] ?></div>
+    <div id="qrcourse">[<?= $class["class_name"] ?> tại <?= $class["class_location"] ?>]</div>
     <div id="qrtime"><?= $class["cd"] ?></div>
   </div>
 </body>

@@ -5,44 +5,57 @@ $users = $_CORE->autoCall("Users", "getAll");
 if (is_array($users)) {
   ?>
 
-  <style>
+<style>
+  #user-list > table {
+    font-size: 14px;
+  }
 
-#user-list > table{
-  font-size: 14px;
-}
-  </style>
+  .table td, .table th {
+    vertical-align: middle; /* Canh giữa các giá trị theo chiều dọc */
+    text-align: left; /* Đảm bảo văn bản được căn trái, thay đổi nếu cần */
+  }
+
+  .btn.btn-edit {
+    margin-right: 10px;
+  }
+
+  .btn-edit:hover, .btn-delete:hover {
+    background-color: #add8e6;
+  }
+
+  #user-list > table > tbody > tr:hover > td{
+    background-color: #f2f2f2 /* Màu xám nhạt khi hover */
+  }
+
+</style>
+
   <table class="table">
     <thead>
       <tr>
-        <th scope="col">#</th>
-        <th scope="col">MSSV</th>
         <th scope="col">Họ & tên</th>
+        <th scope="col">MSSV</th>
+        <th scope="col">Lớp</th>
         <th scope="col">Ngày sinh</th>
-        <th scope="col">Email</th>
         <th scope="col">Số điện thoại</th>
-        <th scope="col">Địa chỉ</th>
         <th scope="col"></th>
       </tr>
     </thead>
     <tbody>
-      <?php $count = 1;
-      
+      <?php
       foreach ($users as $id => $u) { ?>
         <tr>
-          <td><?= $count++ ?></td>
-          <td><?= htmlspecialchars($u["user_mssv"]) ?></td>
           <td><?= htmlspecialchars($u["user_name"]) ?></td>
-          <td><?= htmlspecialchars($u["user_birthdate"]) ?></td>
-          <td><?= htmlspecialchars($u["user_email"]) ?></td>
+          <td><?= htmlspecialchars($u["user_mssv"]) ?></td>
+          <td><?= htmlspecialchars($u["user_class"]) ?></td>
+          <td><?= date("d/m/Y", strtotime($u["user_birthdate"])) ?></td>
           <td><?= htmlspecialchars($u["user_phonenumber"]) ?></td>
-          <td><?= htmlspecialchars($u["user_address"]) ?></td>
           <td>
             <!-- Replace button texts with icons -->
-            <button type="button" class="btn btn-primary" onclick="usr.addEdit(<?= $id ?>)">
+            <button type="button" class="btn btn-edit" onclick="usr.addEdit(<?= $id ?>)">
             <i class="ico-sm icon-pencil"></i>
             </button>
 
-            <button type="button" class="btn btn-warning" onclick="usr.del(<?= $id ?>)">
+            <button type="button" class="btn btn-delete" onclick="usr.del(<?= $id ?>)">
             <i class="ico-sm icon-bin2"></i>
             </button>
           </td>

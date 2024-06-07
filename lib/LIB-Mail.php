@@ -13,6 +13,8 @@ class Mail extends Core {
   //  vars : array of variables for template
   function send ($mail) {
     // (A1) CHECKS
+    error_log(print_r($mail, true));
+    
     if (!isset($mail["to"]) || !isset($mail["subject"]) ||
        (!isset($mail["body"]) && !isset($mail["template"]))) {
       $this->error = "Please set to, subject, body (or template).";

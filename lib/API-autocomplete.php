@@ -5,7 +5,7 @@ $_CORE->ucheck("A");
 // (B) API ENDPOINTS
 $_CORE->autoAPI([
   "user" => ["Autocomplete", "user"],
-  "userEmail" => ["Autocomplete", "userEmail"],
+  "userName" => ["Autocomplete", "userName"],
   "course" => ["Autocomplete", "course"],
   "icourse" => ["Autocomplete", "icourse"]
 ]);

@@ -6,9 +6,9 @@ $_CORE->ucheck("A");
 $_CORE->autoAPI([
   "get" => ["Users", "get"],
   "getAll" => ["Users", "getAll"],
-  "getAlltc" => ["Users", "getAlltc"],
   "save" => ["Users", "save"],
   "suspend" => ["Users", "suspend"],
+  "del" => ["Users", "del"],
   "import" => ["Users", "import"]
 ]);
 

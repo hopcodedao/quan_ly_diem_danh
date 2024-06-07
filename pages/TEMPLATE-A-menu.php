@@ -68,7 +68,7 @@
 
 <li class="nav-item">
 <a class="nav-link ms-1" href="<?= HOST_BASE ?>A/users">
-    <i class="text-secondary ico-sm icon-briefcase"></i> Người dùng
+    <i class="text-secondary ico-sm icon-briefcase"></i> Thành viên
   </a>
   <a class="nav-link ms-1" href="<?= HOST_BASE ?>A/courses">
     <i class="text-secondary ico-sm icon-briefcase"></i> Học kỳ

@@ -94,10 +94,21 @@ class Courses extends Core {
   //  $uid : user id or email
   function addUser ($code, $uid) {
     // (F1) VERIFY VALID USER
-    $this->Core->load("Users");
-    $user = $this->Users->get($uid);
-    if (!is_array($user) || $user["user_level"]=="S") {
-      $this->error = "Invalid user";
+    // $this->Core->load("Users");
+    // $user = $this->Users->get($uid);
+
+    $user = $this->DB->fetch(
+      "SELECT * FROM `users` WHERE `user_id` = ? OR `user_mssv` = ?",
+      [$uid, $uid] // Tìm kiếm theo cả user_id và user_mssv
+  );
+
+    if (!$user) {
+      $this->error = "Không tìm thấy thành viên.";
+      return false;
+    }
+
+    if ($user["user_level"]=="S") {
+      $this->error = "Thành viên đã bị tạm khoá.";
       return false;
     }
 
@@ -105,6 +116,24 @@ class Courses extends Core {
     $this->DB->replace("courses_users", ["course_code", "user_id"], [$code, $user["user_id"]]);
     return true;
   }
+
+  function addAllUsers($code) {
+    $this->Core->load("Users");
+    $allUsers = $this->Users->getAll(); // Lấy tất cả người dùng
+
+    foreach ($allUsers as $user) {
+        // Kiểm tra xem người dùng đã có trong khóa học chưa
+        $exists = $this->DB->fetchCol(
+            "SELECT COUNT(*) FROM `courses_users` WHERE `course_code`=? AND `user_id`=?",
+            [$code, $user["user_id"]]
+        );
+
+        if ($exists == 0 && $user["user_level"] != 'S') { // Chỉ thêm người dùng chưa có và không phải là super admin
+            $this->DB->insert("courses_users", ["course_code", "user_id"], [$code, $user["user_id"]]);
+        }
+    }
+    return true;
+}
 
   // (G) DELETE USER FROM COURSE
   //  $code : course code

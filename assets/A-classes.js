@@ -57,7 +57,8 @@ var classes = {
         hCNote = document.getElementById("class_course_note"),
         hDate = document.getElementById("class_date"),
         hTeacher = document.getElementById("class_teacher"),
-        hDesc = document.getElementById("class_desc");
+        hName = document.getElementById("class_name");
+        hLocation = document.getElementById("class_location");
 
     // (E2) COURSE CHOSEN - UPDATE FORM
     if (set) {
@@ -88,7 +89,9 @@ var classes = {
           } else { hTeacher.innerHTML = "<option value=''>Không có giảng viên được phân công!</option>"; }
 
           // (E2-4) DESCRIPTION
-          hDesc.disabled = false;
+          hName.disabled = false;
+
+          hLocation.disabled = false;
 
           // (E2-5) CLICK COURSE TO CHANGE
           hCourse.onclick = () => classes.toggle(false);
@@ -111,8 +114,8 @@ var classes = {
       hDate.value = "";
       hTeacher.disabled = true;
       hTeacher.innerHTML = "";
-      hDesc.disabled = true;
-      hDesc.value = "";
+      hName.disabled = true;
+      hName.value = "";
     }
   },
 
@@ -122,8 +125,9 @@ var classes = {
     var data = {
       code : document.getElementById("class_course_code").value, // course code
       uid : document.getElementById("class_teacher").value, // user id
-      desc : document.getElementById("class_desc").value, // description
-      date : document.getElementById("class_date").value.replace("T", " ") // date
+      name : document.getElementById("class_name").value, // description
+      date : document.getElementById("class_date").value.replace("T", " "), // date
+      location: document.getElementById("class_location").value //Themdiadiem
     };
     var id = document.getElementById("class_id").value; // class id
     if (id!="") { data.id = id; }
@@ -158,7 +162,7 @@ var classes = {
       ["Course Code", "code", true],
       ["Date (YYYY-MM-DD HH:MM:SS)", "date", true],
       ["Teacher's Email", "email", true],
-      ["Description (If any)", "desc"]
+      ["Description (If any)", "name"]
     ]
   })
 };

@@ -5,6 +5,7 @@ define("HOST_BASE", "http://localhost/quan_ly_diem_danh/"); // CHANGED BY INSTAL
 define("HOST_NAME", parse_url(HOST_BASE, PHP_URL_HOST));
 define("HOST_BASE_PATH", parse_url(HOST_BASE, PHP_URL_PATH));
 define("HOST_ASSETS", HOST_BASE . "assets/");
+define("HOST_VENDOR", HOST_BASE . "vendor/");
 
 // (B) API ENDPOINT
 define("HOST_API", "api/");
@@ -57,5 +58,5 @@ date_default_timezone_set(SYS_TZ);
 
 // (H) USER LEVELS
 define("USR_LVL", [
-  "A" => "Admin", "T" => "Teacher", "U" => "Student", "S" => "Suspended"
+  "A" => "Admin", "T" => "Quản lý", "U" => "Thành viên", "S" => "Tạm khóa"
 ]);

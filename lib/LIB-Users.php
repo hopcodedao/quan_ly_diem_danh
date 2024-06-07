@@ -1,4 +1,12 @@
 <?php
+
+//Import PHPMailer classes into the global namespace
+//These must be at the top of your script, not inside a function
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
+require 'vendor/autoload.php';
+
 // (A-B) PROPERTIES, SETTINGS, HELPER
 // (C-D) GET USERS
 // (E-H) SAVE & DELETE USER
@@ -6,7 +14,8 @@
 // (L-N) REGISTRATION, ACTIVATION
 // (O-Q) USER HASH
 // (R) IMPORT
-class Users extends Core {
+class Users extends Core
+{
   // (A) SETTINGS
   private $hvalid = 900; // validation link good for 15 mins
   private $hlen = 12; // 24 characters validation hash
@@ -14,9 +23,11 @@ class Users extends Core {
   // (B) PASSWORD CHECKER (HELPER)
   //  $password : password to check
   //  $pattern : regex pattern check (at least 8 characters, alphanumeric)
-  function checker ($password, $pattern='/^(?=.*[0-9])(?=.*[A-Z]).{8,20}$/i') {
-    if (preg_match($pattern, $password)) { return true; }
-    else {
+  function checker($password, $pattern = '/^(?=.*[0-9])(?=.*[A-Z]).{8,20}$/i')
+  {
+    if (preg_match($pattern, $password)) {
+      return true;
+    } else {
       $this->error = "Password must be at least 8 characters alphanumeric.";
       return false;
     }
@@ -25,21 +36,23 @@ class Users extends Core {
   // (C) GET USER
   //  $id : user id or email
   //  $hash : optional, also get validation hash
-  function get ($id, $hash=null) {
+  function get($id, $hash = null)
+  {
     $sql = sprintf(
       "SELECT %s FROM `users` u%s WHERE u.`user_%s`=?",
-      $hash==null ? "u.*" : "u.*, h.`hash_code`, h.`hash_time`, h.`hash_tries`",
-      $hash==null ? "" : " LEFT JOIN `users_hash` h ON (u.`user_id`=h.`user_id` AND h.`hash_for`=?)",
+      $hash == null ? "u.*" : "u.*, h.`hash_code`, h.`hash_time`, h.`hash_tries`",
+      $hash == null ? "" : " LEFT JOIN `users_hash` h ON (u.`user_id`=h.`user_id` AND h.`hash_for`=?)",
       is_numeric($id) ? "id" : "email"
     );
-    $data = $hash==null ? [$id] : [$hash, $id];
+    $data = $hash == null ? [$id] : [$hash, $id];
     return $this->DB->fetch($sql, $data);
   }
 
   // (D) GET ALL OR SEARCH USERS (ADMIN USE)
   //  $search : optional, user name or email
   //  $page : optional, current page number
-  function getAll ($search=null, $page=null) {
+  function getAll($search = null, $page = null)
+  {
     // (D1) PARITAL USERS SQL + DATA
     $sql = "FROM `users`";
     $data = null;
@@ -51,7 +64,8 @@ class Users extends Core {
     // (D2) PAGINATION
     if ($page != null) {
       $this->Core->paginator(
-        $this->DB->fetchCol("SELECT COUNT(*) $sql", $data), $page
+        $this->DB->fetchCol("SELECT COUNT(*) $sql", $data),
+        $page
       );
       $sql .= $this->Core->page["lim"];
     }
@@ -66,34 +80,102 @@ class Users extends Core {
   //  $password : user password
   //  $lvl : user level
   //  $id : user id (for updating only)
-  function save ($name, $email, $password, $lvl, $mssv, $address, $birthdate, $phonenumber, $id=null) {
+  function save($name, $email, $password, $lvl, $mssv, $address, $birthdate, $phonenumber, $class, $id = null)
+  {
     // (E1) DATA SETUP + PASSWORD CHECK
-    if (!$this->checker($password)) { return false; }
-    $fields = ["user_name", "user_email", "user_password", "user_level", "user_mssv", "user_address", "user_birthdate", "user_phonenumber"];
+    if ($id === null || !empty($password)) {
+      // Chỉ kiểm tra và mã hóa mật khẩu nếu mật khẩu được cung cấp hoặc đang thêm người dùng mới
+      if (!$this->checker($password)) {
+        return false;
+      }
+      $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+    }
+
+    $avatarFilename = null;
+
+    // Xử lý tệp avatar
+    if (isset($_FILES['user_avatar']) && $_FILES['user_avatar']['error'] === UPLOAD_ERR_OK) {
+      $avatarFile = $_FILES['user_avatar'];
+
+      // Kiểm tra kiểu tệp và kích thước (ví dụ: chỉ cho phép JPEG, PNG, tối đa 2MB)
+      $allowedTypes = ['image/jpeg', 'image/png'];
+      $maxSize = 2 * 1024 * 1024; // 2MB
+
+      if (in_array($avatarFile['type'], $allowedTypes) && $avatarFile['size'] <= $maxSize) {
+        // Tạo tên tệp duy nhất
+        $avatarFilename = md5($avatarFile['name'] . time()) . '.jpg';
+
+        // Đường dẫn lưu trữ hình ảnh
+        $avatarPath = __DIR__ . '/../assets/uploads/user_avatars/' . $avatarFilename;
+
+        // Tạo lại kích thước hình ảnh (ví dụ: 150x150 pixels)
+        $image = imagecreatefromstring(file_get_contents($avatarFile['tmp_name']));
+        $resizedImage = imagescale($image, 150, 150);
+        imagejpeg($resizedImage, $avatarPath, 80); // Lưu ảnh với chất lượng 80%
+      } else {
+        // Trả về lỗi nếu kiểu tệp hoặc kích thước không hợp lệ
+        $this->error = "Kiểu tệp hoặc kích thước hình ảnh không hợp lệ.";
+        return false; // Kết thúc hàm và trả về lỗi
+      }
+    }
+
+    $fields = ["user_name", "user_email", "user_level", "user_mssv", "user_address", "user_birthdate", "user_phonenumber", "user_class", "user_avatar"]; // Thêm "user_avatar" vào fields
     $data = [
       $name,
       $email,
-      password_hash($password, PASSWORD_DEFAULT),
       $lvl,
-      $mssv,      // User code or identifier
-      $address,      // Address
-      $birthdate,    // Date of birth
-      $phonenumber   // Phone number
+      $mssv,
+      $address,
+      $birthdate,
+      $phonenumber,
+      $class,
+      $avatarFilename // Sử dụng giá trị của $avatarFilename ở đây
     ];
 
+    if (isset($hashedPassword)) {
+      $fields[] = "user_password";
+      $data[] = $hashedPassword;
+    }
+
+
     // (E2) ADD/UPDATE USER
-    if ($id===null) {
+    if ($id === null) {
       $this->DB->insert("users", $fields, $data);
+
+      // Gửi email chỉ khi thêm mới người dùng
+      $mail = new PHPMailer(true); // Tạo đối tượng PHPMailer
+
+      // Cài đặt máy chủ
+      $mail->isSMTP();                                            // Gửi sử dụng SMTP
+      $mail->Host = 'smtp.gmail.com';                    // Đặt máy chủ SMTP để gửi qua
+      $mail->SMTPAuth = true;                                   // Kích hoạt xác thực SMTP
+      $mail->Username = 'nguyenhoahop1903@gmail.com';                     // Tên đăng nhập SMTP
+      $mail->Password = 'nxshqottuxbqtbbm';                               // Mật khẩu SMTP
+      $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            // Kích hoạt mã hóa SSL
+      $mail->Port = 465;                                    // TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+
+      // Người nhận
+      $mail->setFrom('nguyenhoahop1903@gmail.com', 'Nguyễn Hoà Hợp');
+      $mail->addAddress($email, $name);     // Add a recipient
+
+      // Nội dung
+      $mail->isHTML(false);                                  // Set email format to HTML
+      $mail->Subject = 'Thông tin đăng nhập';
+      $mail->Body = "Xin chào $name,\nMật khẩu của bạn là: $password\nVui lòng đăng nhập và đổi mật khẩu ngay sau khi nhận được email này.";
+
+      $mail->send();
     } else {
       $data[] = $id;
       $this->DB->update("users", $fields, "`user_id`=?", $data);
     }
+    
     return true;
   }
 
   // (F) DELETE USER (ADMIN USE)
   //  $id : user id
-  function del ($id) {
+  function del($id)
+  {
     $this->DB->start();
     $this->DB->delete("users", "`user_id`=?", [$id]);
     $this->DB->delete("users_hash", "`user_id`=?", [$id]);
@@ -103,9 +185,12 @@ class Users extends Core {
 
   // (G) SUSPEND USER
   //  $id : user id
-  function suspend ($id) {
-    $this->DB->update("users",
-      ["user_level"], "`user_id`=?",
+  function suspend($id)
+  {
+    $this->DB->update(
+      "users",
+      ["user_level"],
+      "`user_id`=?",
       ["S", $id]
     );
   }
@@ -114,7 +199,8 @@ class Users extends Core {
   //  $name : name
   //  $cpass : current password
   //  $pass : new password
-  function update ($name, $cpass, $pass) {
+  function update($name, $cpass, $pass)
+  {
     // (H1) MUST BE SIGNED IN
     if (!isset($_SESSION["user"])) {
       $this->error = "Please sign in first";
@@ -122,7 +208,9 @@ class Users extends Core {
     }
 
     // (H2) PASSWORD STRENGTH
-    if (!$this->checker($pass)) { return false; }
+    if (!$this->checker($pass)) {
+      return false;
+    }
 
     // (H3) VERIFY CURRENT PASSWORD
     if (!$this->verify($_SESSION["user"]["user_email"], $cpass)) {
@@ -130,8 +218,10 @@ class Users extends Core {
     }
 
     // (H4) UPDATE DATABASE
-    $this->DB->update("users",
-      ["user_name", "user_password"], "`user_id`=?",
+    $this->DB->update(
+      "users",
+      ["user_name", "user_password"],
+      "`user_id`=?",
       [$name, password_hash($pass, PASSWORD_DEFAULT), $_SESSION["user"]["user_id"]]
     );
     return true;
@@ -173,13 +263,18 @@ class Users extends Core {
   // (J) LOGIN
   //  $email : user email
   //  $password : user password
-  function login ($email, $password) {
+  function login($email, $password)
+  {
     // (J1) ALREADY SIGNED IN
-    if (isset($_SESSION["user"])) { return true; }
+    if (isset($_SESSION["user"])) {
+      return true;
+    }
 
     // (J2) VERIFY EMAIL PASSWORD ACCOUNT
     $user = $this->verify($email, $password);
-    if ($user===false) { return false; }
+    if ($user === false) {
+      return false;
+    }
 
     // (J3) SESSION START
     $_SESSION["user"] = $user;
@@ -191,9 +286,12 @@ class Users extends Core {
   }
 
   // (K) LOGOUT
-  function logout () {
+  function logout()
+  {
     // (K1) ALREADY SIGNED OFF
-    if (!isset($_SESSION["user"])) { return true; }
+    if (!isset($_SESSION["user"])) {
+      return true;
+    }
 
     // (K2) END SESSION
     $this->Session->destroy();
@@ -204,7 +302,7 @@ class Users extends Core {
   //  $name : user name
   //  $email : user email
   //  $password : user password
-  function register($name, $email, $password, $mssv, $address, $birthdate, $phonenumber)
+  function register($name, $email, $password, $mssv, $address, $birthdate, $phonenumber, $class)
   {
     // (L1) ALREADY SIGNED IN
     if (isset($_SESSION["user"])) {
@@ -220,7 +318,7 @@ class Users extends Core {
 
     // (L3) CREATE ACCOUNT + SEND ACTIVATION LINK
     $this->DB->start();
-    $ok = $this->save($name, $email, $password, "U", $mssv, $address, $birthdate, $phonenumber);
+    $ok = $this->save($name, $email, $password, "U", $mssv, $address, $birthdate, $phonenumber, $class);
     if ($ok) {
       $ok = $this->hsend($this->DB->lastID);
     }
@@ -353,7 +451,9 @@ class Users extends Core {
   function hashDel($id, $for): void
   {
     $this->DB->delete(
-      "users_hash", "`user_id`=? AND `hash_for`=?", [$id, $for]
+      "users_hash",
+      "`user_id`=? AND `hash_for`=?",
+      [$id, $for]
     );
   }
 
@@ -362,7 +462,7 @@ class Users extends Core {
   //  $email : user email
   //  $password : user password
   //  $level : user level
-  function import($name, $email, $password, $level, $mssv, $address, $birthdate, $phonenumber)
+  function import($name, $email, $password, $level, $mssv, $address, $birthdate, $phonenumber, $class)
   {
     // (R1) CHECK REGISTERED
     if (is_array($this->get($email))) {
@@ -375,6 +475,6 @@ class Users extends Core {
     }
 
     // (R3) SAVE
-    return $this->save($name, $email, $password, $level, $mssv, $address, $birthdate, $phonenumber);
+    return $this->save($name, $email, $password, $level, $mssv, $address, $birthdate, $phonenumber, $class);
   }
 }

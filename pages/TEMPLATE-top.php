@@ -23,18 +23,10 @@
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
-  
-<script>
-  function chooseFile(fileInput) {
-    if (fileInput.files && fileInput.files[0]) {
-      var reader = new FileReader();
-      reader.onload = function(e) {
-        $('#image_preview').attr('src', e.target.result);
-      };
-      reader.readAsDataURL(fileInput.files[0]);
-    }
-  };
-</script>
+
+  <script>
+
+  </script>
   <!-- (A3) WEB APP MANIFEST -->
   <!-- https://web.dev/add-manifest/ -->
   <link rel="manifest" href="<?= HOST_BASE ?>CB-manifest.json">
@@ -66,11 +58,6 @@
     unset($_PMETA);
   } ?>
 
-  <style>
-    #cb-body>div>nav>div {
-      margin-right: 20px;
-    }
-  </style>
 </head>
 
 <body class="bg-light">
@@ -113,22 +100,22 @@
   <div id="cb-body" class="d-flex">
     <?php if (isset($_SESSION["user"])) { ?>
       <!-- (C1) LEFT SIDEBAR -->
-      
+
       <nav id="cb-side" class="bg-dark text-white p-2">
         <ul class="navbar-nav">
           <?php require PATH_PAGES . "TEMPLATE-" . $_SESSION["user"]["user_level"] . "-menu.php"; ?>
         </ul>
       </nav>
-      
+
     <?php } ?>
 
     <!-- (C2) RIGHT CONTENTS -->
     <div class="flex-grow-1">
-      
+
       <?php if (isset($_SESSION["user"])) { ?>
         <!-- (C2-1) TOP NAV -->
         <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #2f638d;">
-        
+
           <div class="container-fluid">
             <button id="cb-toggle" class="navbar-toggler btn btn-sm text-white ico icon-menu"
               onclick="cb.toggle()"></button>
@@ -136,9 +123,17 @@
             <div class="navbar-nav me-auto mb-2 mb-lg-0"></div>
 
             <div class="d-flex align-items-center">
-              <span class="text-white pe-3">Xin chào, <?= $_SESSION["user"]["user_name"] ?>!</span> <!-- Thêm dòng này -->
+              <span class="text-white pe-3">Xin chào, <?= $_SESSION["user"]["user_name"] ?></span> <!-- Thêm dòng này -->
               <div class="dropdown">
-                <div class="text-white ico icon-user p-2" role="button" data-bs-toggle="dropdown"></div>
+                <?php if (isset($_SESSION["user"]["user_avatar"]) && $_SESSION["user"]["user_avatar"] != ""): ?>
+                  <img src="<?= HOST_ASSETS . "uploads/user_avatars/" . $_SESSION["user"]["user_avatar"] ?>" alt="Avatar"
+                    class="rounded-circle" width="40" height="40" role="button" data-bs-toggle="dropdown"
+                    aria-expanded="false" style="margin-right: 20px">
+                <?php else: ?>
+                  <img src="<?= HOST_ASSETS ?>default_avatar.png" alt="Avatar" class="rounded-circle" width="40" height="40"
+                    role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <?php endif; ?>
+
                 <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-end">
                   <li><a class="dropdown-item" href="<?= HOST_BASE ?>myaccount">
                       <i class="text-secondary ico-sm icon-user"></i> Tài khoản của tôi

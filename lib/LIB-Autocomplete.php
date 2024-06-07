@@ -29,11 +29,14 @@ class Autocomplete extends Core {
   }
 
   // (C) SUGGEST USER EMAIL
-  function userEmail ($search) {
-    return $this->query(
-      "SELECT * FROM `users` WHERE `user_name` LIKE ? OR `user_email` LIKE ?",
-      ["%$search%", "%$search%"], "user_name", "user_email"
-    );
+  function userName($search)
+  {
+      return $this->query(
+          "SELECT * FROM `users` WHERE `user_name` LIKE ? OR `user_mssv` LIKE ?",
+          ["%$search%", "%$search%"],
+          "user_name",
+          "user_mssv"
+      );
   }
 
   // (D) SUGGEST COURSE  

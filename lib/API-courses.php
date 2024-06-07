@@ -8,6 +8,7 @@ $_CORE->autoAPI([
   "import" => ["Courses", "import"],
   "del" => ["Courses", "del"],
   "addUser" => ["Courses", "addUser"],
+  "addAllUsers" => ["Courses", "addAllUsers"],
   "delUser" => ["Courses", "delUser"]
 ]);
 

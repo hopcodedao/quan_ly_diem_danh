@@ -13,23 +13,60 @@ require PATH_PAGES . "TEMPLATE-top.php"; ?>
 <!-- (B1) HEADER -->
 <h4 class="mb3">QUẢN LÝ HOẠT ĐỘNG</h4>
 <style>
-  #cb-page-1 > h4{
+/* Điều chỉnh nút */
+#cb-page-1 > form > div.btn-group > button,
+#cb-page-1 > form > button:nth-child(2) {
+  color: white;
+}
+
+#cb-page-1 > form > div.btn-group > button:nth-child(1) {
+  background-color: #1f9e44;
+}
+
+#cb-page-1 > form > div.btn-group > button:nth-child(2) {
+  background-color: #2f638d;
+}
+
+/* Biểu tượng màu trắng */
+.white-icon i {
+  color: white !important;
+}
+
+/* Tiêu đề trang */
+#cb-page-1 > h4 {
   font-weight: bold;
 }
+
+/* Nút không xuống dòng */
+#cb-page-1 > form > div.btn-group > button {
+  white-space: nowrap;
+}
+
+/* Tạo khoảng cách giữa hai nút */
+#cb-page-1 > form > div.btn-group > button {
+  margin-right: 5px;
+  border: none;
+  border-radius: 5px;
+}
+
+#class-search{
+  margin-right: 5px;
+}
+
+
 </style>
 <!-- (B2) SEARCH BAR -->
 <form class="d-flex align-items-stretch head border mb-3 p-2" onsubmit="return classes.search()">
   <input type="text" id="class-search" placeholder="Tìm kiếm" class="form-control form-control-sm">
-  <button type="submit" class="btn btn-primary p-3 mx-1 ico-sm icon-search"></button>
-  <button class="btn btn-primary p-3 ico-sm icon-arrow-right" type="button" data-bs-toggle="dropdown"></button>
-  <ul class="dropdown-menu dropdown-menu-dark">
-    <li class="dropdown-item" onclick="classes.addEdit()">
+
+  <div class="btn-group">
+    <button class="btn btn-primary p-3 white-icon" type="button" onclick="classes.addEdit()">
       <i class="text-secondary ico-sm icon-plus"></i> Thêm hoạt động
-    </li>
-    <li class="dropdown-item" onclick="classes.import()">
+    </button>
+    <button class="btn btn-primary p-3 white-icon" type="button" onclick="classes.import()">
       <i class="text-secondary ico-sm icon-upload3"></i> Tải tệp CSV
-    </li>
-  </ul>
+    </button>
+  </div>
 </form>
 
 <!-- (B3) CLASSES LIST -->

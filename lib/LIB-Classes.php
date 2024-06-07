@@ -6,10 +6,10 @@ class Classes extends Core {
   //  $date : class date
   //  $desc : class description
   //  $id : class id (for edit only)
-  function save ($code, $uid, $date, $desc=null, $id=null) {
+  function save ($code, $uid, $date, $name=null, $location=null, $id=null) {
     // (A1) DATA SETUP
-    $fields = ["course_code", "user_id", "class_date", "class_desc"];
-    $data = [$code, $uid, $date, $desc];
+    $fields = ["course_code", "user_id", "class_date", "class_name", "class_location"]; // Thêm "class_location" vào danh sách trường
+    $data = [$code, $uid, $date, $name, $location];
 
     // (A2) ADD/UPDATE CLASS
     if ($id==null) {
@@ -28,7 +28,7 @@ class Classes extends Core {
   //  $date : class date & time
   //  $email : teacher's email
   //  $desc : description, optional
-  function import ($code, $date, $email, $desc) {
+  function import ($code, $date, $email, $name) {
     // (B1) CHECK - COURSE CODE
     $this->Core->load("Courses");
     $course = $this->Courses->get($code);
@@ -61,7 +61,7 @@ class Classes extends Core {
     }
 
     // (B4) IMPORT CLASS
-    $this->save($course["course_code"], $teacher["user_id"], $date, $desc);
+    $this->save($course["course_code"], $teacher["user_id"], $date, $name);
     return true;
   }
 
@@ -79,13 +79,13 @@ class Classes extends Core {
   //  $id : class id
   function get ($id) {
     return $this->DB->fetch(
-      "SELECT cl.*, DATE_FORMAT(cl.`class_date`, '".DT_LONG."') `cd`, co.`course_code`, co.`course_name`, u.`user_name`
-       FROM `classes` cl 
-       LEFT JOIN `courses` co USING (`course_code`)
-       LEFT JOIN `users` u USING (`user_id`)
-       WHERE cl.`class_id`=?", [$id]
+        "SELECT cl.*, DATE_FORMAT(cl.`class_date`, '".DT_LONG."') `cd`, co.`course_code`, co.`course_name`, u.`user_name`, cl.`class_location` 
+            FROM `classes` cl 
+            LEFT JOIN `courses` co USING (`course_code`)
+            LEFT JOIN `users` u USING (`user_id`)
+            WHERE cl.`class_id`=?", [$id]
     );
-  }
+}
 
   // (E) GET CLASSES
   //  $search : optional, course code

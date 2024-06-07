@@ -17,28 +17,17 @@ require PATH_PAGES . "TEMPLATE-top.php"; ?>
   color: white;
 }
 
-#cb-page-1 > form > div.btn-group > button:nth-child(1),
-#cb-page-1 > form > button:nth-child(3) {
-  background-color: #1a7f64;
+#cb-page-1 > form > div.btn-group > button:nth-child(1) {
+  background-color: #1f9e44;
 }
 
-/* #cb-page-1 > form > div.btn-group > button:nth-child(2) {
-  background-color: #007bff;
-} */
-
-#cb-page-1 > form > button:nth-child(2) {
+#cb-page-1 > form > div.btn-group > button:nth-child(2) {
   background-color: #2f638d;
-  border: none;
 }
 
 /* Biểu tượng màu trắng */
 .white-icon i {
   color: white !important;
-}
-
-/* Điều chỉnh khoảng cách icon */
-#cb-page-1 > form > button.btn.btn-primary.p-3.white-icon > i:nth-child(2) {
-  margin-left: -5px;
 }
 
 /* Tiêu đề trang */
@@ -50,6 +39,19 @@ require PATH_PAGES . "TEMPLATE-top.php"; ?>
 #cb-page-1 > form > div.btn-group > button {
   white-space: nowrap;
 }
+
+/* Tạo khoảng cách giữa hai nút */
+#cb-page-1 > form > div.btn-group > button {
+  margin-right: 5px;
+  border: none;
+  border-radius: 5px;
+}
+
+#user-search{
+  margin-right: 5px;
+}
+
+
 </style>
 
 <!-- (B1) HEADER -->
@@ -57,12 +59,11 @@ require PATH_PAGES . "TEMPLATE-top.php"; ?>
 
 <!-- (B2) SEARCH BAR -->
 <form class="d-flex align-items-stretch head border mb-3 p-2" onsubmit="return usr.search()">
-  <input type="text" id="user-search" placeholder="Tìm kiếm" class="form-control form-control-sm">
-  <button type="submit" class="btn btn-primary p-3 mx-1 ico-sm icon-search"></button>
+  <input type="text" id="user-search" placeholder="Nhập Thông Tin" class="form-control form-control-sm">
 
   <div class="btn-group">
     <button class="btn btn-primary p-3 white-icon" type="button" onclick="usr.addEdit()">
-      <i class="text-secondary ico-sm icon-plus"></i> Thêm người dùng
+      <i class="text-secondary ico-sm icon-plus"></i> Thêm thành viên
     </button>
     <button class="btn btn-primary p-3 white-icon" type="button" onclick="usr.import()">
       <i class="text-secondary ico-sm icon-upload3"></i> Tải tệp CSV

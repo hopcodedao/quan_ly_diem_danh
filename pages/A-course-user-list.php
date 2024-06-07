@@ -8,11 +8,11 @@ if (is_array($users)) { foreach ($users as $id=>$u) { ?>
   <div class="flex-grow-1">
     <strong><?=$u["user_name"]?></strong><br>
     <small><?=USR_LVL[$u["user_level"]]?></small> |
-    <small><?=$u["user_email"]?></small>
+    <small><?=$u["user_mssv"]?></small>
   </div>
   <button type="button" class="btn btn-danger p-3 ico-sm icon-bin2" onclick="cuser.del(<?=$id?>)"></button>
 </div>
-<?php }} else { echo "No users found."; }
+<?php }} else { echo "Không tìm thấy thành viên."; }
 
 // (C) PAGINATION
 $_CORE->load("Page");

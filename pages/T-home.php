@@ -1,9 +1,11 @@
 <?php
 // (A) PAGE META
-$_PMETA = ["load" => [
-  ["s", HOST_ASSETS."T-classes.js", "defer"],
-  ["s", HOST_ASSETS."TA-attend.js", "defer"]
-]];
+$_PMETA = [
+  "load" => [
+    ["s", HOST_ASSETS . "T-classes.js", "defer"],
+    ["s", HOST_ASSETS . "TA-attend.js", "defer"]
+  ]
+];
 
 // (B) HTML
 require PATH_PAGES . "TEMPLATE-top.php"; ?>
@@ -18,7 +20,7 @@ require PATH_PAGES . "TEMPLATE-top.php"; ?>
     <option value="0">Vào ngày</option>
     <option value="">Tất cả</option>
   </select>
-  <input type="date" id="search-date" class="mx-1 form-control form-control-sm" value="<?=date("Y-m-d")?>">
+  <input type="date" id="search-date" class="mx-1 form-control form-control-sm" value="<?= date("Y-m-d") ?>">
   <button class="btn btn-primary p-3 ico-sm icon-search" type="submit"></button>
 </form>
 

@@ -106,7 +106,7 @@ require PATH_PAGES . "TEMPLATE-top.php"; ?>
     <div class="small-box bg-white">
       <div class="inner">
         <h3><?= $studentsCount ?></h3>
-        <p>Tổng Sinh Viên</p>
+        <p>Tổng Thành Viên</p>
       </div>
       <div class="icon">
         <i class="icon-user"></i>
@@ -123,7 +123,7 @@ require PATH_PAGES . "TEMPLATE-top.php"; ?>
     <div class="small-box bg-white">
       <div class="inner">
         <h3><?= $teachersCount ?></h3>
-        <p>Tổng Giảng Viên</p>
+        <p>Tổng Quản Lý</p>
       </div>
       <div class="icon">
         <i class="icon-star-full"></i>

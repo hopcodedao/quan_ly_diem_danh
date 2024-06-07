@@ -12,44 +12,63 @@ $_PMETA = ["load" => [
 require PATH_PAGES . "TEMPLATE-top.php"; ?>
 <!-- (B1) HEADER -->
 <h4 class="mb-3">QUẢN LÝ HỌC KỲ</h4>
+
 <style>
-
-#cb-page-1 > form > button:nth-child(3){
-  width: 6%;
-  background-color: #1a7f64;
-  border: none;
-}
-
-#cb-page-1 > form > button.btn.btn-primary.p-3.white-icon > i::before{
+/* Điều chỉnh nút */
+#cb-page-1 > form > div.btn-group > button,
+#cb-page-1 > form > button:nth-child(2) {
   color: white;
 }
 
-#cb-page-1 > h4{
+#cb-page-1 > form > div.btn-group > button:nth-child(1){
+  background-color: #1f9e44;
+}
+
+#cb-page-1 > form > div.btn-group > button:nth-child(2) {
+  background-color: #2f638d;
+}
+
+/* Biểu tượng màu trắng */
+.white-icon i {
+  color: white !important;
+}
+
+/* Tiêu đề trang */
+#cb-page-1 > h4 {
   font-weight: bold;
 }
 
-#cb-page-1 > form > button.btn.btn-primary.p-3.white-icon > i:nth-child(2) {
-  margin-left: -5px; /* Điều chỉnh giá trị này để các icon sát nhau hơn hoặc xa nhau hơn */
+/* Nút không xuống dòng */
+#cb-page-1 > form > div.btn-group > button {
+  white-space: nowrap;
 }
 
+/* Tạo khoảng cách giữa hai nút */
+#cb-page-1 > form > div.btn-group > button {
+  margin-right: 5px;
+  border: none;
+  border-radius: 5px;
+}
+
+#course-search{
+  margin-right: 5px;
+}
 
 </style>
+
 <!-- (B2) SEARCH BAR -->
 <form class="d-flex align-items-stretch head border mb-3 p-2" onsubmit="return course.search()">
   <input type="text" id="course-search" placeholder="Tìm kiếm" class="form-control form-control-sm">
-  <button type="submit" class="btn btn-primary p-3 mx-1 ico-sm icon-search"></button>
-  <button class="btn btn-primary p-3 white-icon" type="button" data-bs-toggle="dropdown">
-  <i class="text-secondary ico-sm icon-plus"></i>
-  <i class="text-secondary ico-sm icon-users"></i>
-</button>
-  <ul class="dropdown-menu dropdown-menu-dark">
-    <li class="dropdown-item" onclick="course.addEdit()">
+
+
+  <div class="btn-group">
+    <button class="btn btn-primary p-3 white-icon" type="button" onclick="course.addEdit()">
       <i class="text-secondary ico-sm icon-plus"></i> Thêm học kỳ
-    </li>
-    <li class="dropdown-item" onclick="course.import()">
+    </button>
+    <button class="btn btn-primary p-3 white-icon" type="button" onclick="course.import()">
       <i class="text-secondary ico-sm icon-upload3"></i> Tải tệp CSV
-    </li>
-  </ul>
+    </button>
+  </div>
 </form>
 
 <!-- (B3) COURSES LIST -->
