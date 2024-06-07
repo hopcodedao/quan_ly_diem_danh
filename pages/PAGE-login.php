@@ -67,7 +67,9 @@ require PATH_PAGES . "TEMPLATE-top.php"; ?>
         background-size: cover;
         min-height: 100vh;
       }
-
+      .logo-hd img {
+        width: 330px;
+      }
       #cb-page-1>div:nth-child(16)>div.row.h-100.pt-5>div.col-lg-4.col-md-5.col-12>div.logo-top>ul {
         display: flex;
         align-items: center;
@@ -165,7 +167,7 @@ require PATH_PAGES . "TEMPLATE-top.php"; ?>
           <ul class="d-flex flex-column bd-highlight mb-3 mg-0">
             <li class="p-2 bd-highlight logo-hd">
 
-              <img src="<?= HOST_ASSETS ?>/login_files/eoffice-login.png">
+              <img src="<?= HOST_ASSETS ?>CTXH.png">
 
             </li>
             <img src="<?= HOST_ASSETS ?>/login_files/CTT.png">

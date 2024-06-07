@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th6 04, 2024 lúc 09:42 PM
+-- Thời gian đã tạo: Th6 07, 2024 lúc 05:41 AM
 -- Phiên bản máy phục vụ: 10.4.25-MariaDB
 -- Phiên bản PHP: 8.1.10
 
@@ -57,7 +57,8 @@ CREATE TABLE `classes` (
 --
 
 INSERT INTO `classes` (`class_id`, `course_code`, `user_id`, `class_date`, `class_name`, `class_hash`, `class_location`) VALUES
-(7, 'HKI', 1, '2024-06-01 00:00:00', 'Tham gia hỗ trợ hoạt động ', 't9hKY4FXt0EK', 'Đông Thắng');
+(7, 'HKI', 1, '2024-06-01 00:00:00', 'Tham gia hỗ trợ hoạt động ', 't9hKY4FXt0EK', 'Đông Thắng'),
+(8, 'HKI', 2547, '2024-06-01 00:00:00', 'Hỗ trợ gian hàng', 'Js9gqXy2SiuA', 'Trường');
 
 -- --------------------------------------------------------
 
@@ -102,6 +103,7 @@ INSERT INTO `courses_users` (`course_code`, `user_id`) VALUES
 ('HKI', 2547),
 ('HKI', 2565),
 ('HKI', 2566),
+('HKI', 2567),
 ('HKII', 1),
 ('HKII', 2547),
 ('HKII', 2565),
@@ -152,18 +154,19 @@ CREATE TABLE `users` (
   `user_address` varchar(255) DEFAULT NULL,
   `user_birthdate` date DEFAULT NULL,
   `user_phonenumber` varchar(20) DEFAULT NULL,
-  `user_class` varchar(255) DEFAULT NULL
+  `user_class` varchar(255) DEFAULT NULL,
+  `user_avatar` varchar(255) DEFAULT 'default_avatar.png'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Đang đổ dữ liệu cho bảng `users`
 --
 
-INSERT INTO `users` (`user_id`, `user_level`, `user_name`, `user_email`, `user_password`, `user_mssv`, `user_address`, `user_birthdate`, `user_phonenumber`, `user_class`) VALUES
-(1, 'A', 'Nguyễn Hoà Hợp', 'nguyenhoahop1903@gmail.com', '$2y$10$UBa1mqQQCVApPOycKG1RK.Y4Rj/3ManzvbTnKxAe.1GLvReIsqhEu', 'CNDT2311034', 'Sóc Trăng', '2024-06-18', '0342321142', 'Công nghệ thông tin'),
-(2547, 'A', 'Nguyễn Hoà Hợp', 'admin@gmail.com', '$2y$10$G/yLgFjnIYqVFtFyv4DT4eXJkObod8QDEtUBVjd1/wTj9olkSa7Zy', '2101343', 'Sóc Trăng', '2024-06-12', '0334793743', 'Công nghệ thông tin'),
-(2565, 'U', 'Trần Thúy Nhi', 'ngaotvchanelsp@gmail.com', '$2y$10$NPw2Knx4TzvEs5YHH0B4muR5A1r2ReXi3m4UC68TD/GoLjiuPKfu6', 'CNDT2311034', 'Sóc Trăng', '2003-03-19', '0334793743', 'Công nghệ thông tin'),
-(2566, 'U', 'Đinh Thị Ngọc Cầm', 'nhhop2101343@student.ctuet.edu.vn', '$2y$10$suaqp67zMeoykZkaqdo/buZkBcl9W7F/5Q4TZfXdNATiGZXrq.0Ha', 'CNDT2311034', 'Sóc Trăng', '2003-03-19', '0334793743', 'Công nghệ thông tin');
+INSERT INTO `users` (`user_id`, `user_level`, `user_name`, `user_email`, `user_password`, `user_mssv`, `user_address`, `user_birthdate`, `user_phonenumber`, `user_class`, `user_avatar`) VALUES
+(1, 'A', 'Nguyễn Hoà Hợp', 'nguyenhoahop1903@gmail.com', '$2y$10$UBa1mqQQCVApPOycKG1RK.Y4Rj/3ManzvbTnKxAe.1GLvReIsqhEu', 'CNDT2311034', 'Sóc Trăng', '2003-03-19', '0342321142', 'Công nghệ thông tin', NULL),
+(2547, 'T', 'Nguyễn Hoà Hợp', 'admin@gmail.com', '$2y$10$UBa1mqQQCVApPOycKG1RK.Y4Rj/3ManzvbTnKxAe.1GLvReIsqhEu', '2101343', 'Sóc Trăng', '2003-06-12', '0334793743', 'Công nghệ thông tin', 'default_avatar.png'),
+(2566, 'U', 'Đinh Thị Ngọc Cầm', 'nhhop2101343@student.ctuet.edu.vn', '$2y$10$UBa1mqQQCVApPOycKG1RK.Y4Rj/3ManzvbTnKxAe.1GLvReIsqhEu', 'CNDT2311034', 'Sóc Trăng', '2003-03-19', '0334793743', 'Công nghệ thông tin', '6d7217dbc542ac666c233c4eeeff15b0.jpg'),
+(2585, 'U', 'Nguyễn Đăng Khoa', 'halongbro.29@gmail.com', '$2y$10$XVoArs/4QFX9xpkz0v3O5OzNYTMLk6hmIJrkimqsQ9wS1fyCbK.Oa', '2101343', 'Sóc Trăng', '2003-03-19', '0342321142', 'Công nghệ thông tin', '0512c4d56025934c135de20e4bd88b45.jpg');
 
 -- --------------------------------------------------------
 
@@ -255,13 +258,13 @@ ALTER TABLE `users_hash`
 -- AUTO_INCREMENT cho bảng `classes`
 --
 ALTER TABLE `classes`
-  MODIFY `class_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `class_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT cho bảng `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2567;
+  MODIFY `user_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2587;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
